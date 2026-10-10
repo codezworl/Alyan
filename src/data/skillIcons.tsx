@@ -1,12 +1,12 @@
 import { 
   FaReact, FaHtml5, FaCss3Alt, FaBootstrap, FaJsSquare, FaPython, FaPhp, FaLaravel, 
-  FaNodeJs, FaGitAlt, FaFigma, FaDatabase, FaCode 
+  FaNodeJs, FaGitAlt, FaFigma
 } from 'react-icons/fa';
 import { 
   SiTailwindcss, SiExpress, SiNestjs, SiMongodb, SiMysql, SiDotnet,
   SiSocketdotio
 } from 'react-icons/si';
-import { Paintbrush, Video, Wrench } from 'lucide-react';
+import { Paintbrush, Video } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 export interface SkillIcon {

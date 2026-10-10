@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, Eye, Download } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { Typewriter } from 'react-simple-typewriter';
 import profileImg from '../assets/image2.jpg';
 

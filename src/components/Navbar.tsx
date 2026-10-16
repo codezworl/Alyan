@@ -1,111 +1,88 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Menu, X, Download, Eye } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 import logoImg from '../assets/logo.jpeg';
 
+const links = [
+  { name: 'About', href: '#about' },
+  { name: 'Why Me', href: '#why-me' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Education', href: '#education' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Services', href: '#services' },
+  { name: 'Contact', href: '#contact' },
+];
+
 export default function Navbar({ theme, toggleTheme, showLogo }: { theme: string, toggleTheme: () => void, showLogo: boolean }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [spin, setSpin] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSpin(true);
-      setTimeout(() => setSpin(false), 1000);
-    }, 10000);
-    return () => clearInterval(interval);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      let current = '';
+      for (const l of links) {
+        const el = document.querySelector(l.href) as HTMLElement | null;
+        if (el && el.getBoundingClientRect().top <= 140) current = l.href;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const links = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Why Me', href: '#why-me' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Education', href: '#education' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Services', href: '#services' },
-    { name: 'Contact', href: '#contact' },
-  ];
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-surface/70 backdrop-blur-xl border-b border-border py-3 transition-all duration-300 shadow-sm">
-      <div className="w-full max-w-[95%] 2xl:max-w-[1400px] mx-auto flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-3 group" id="navbar-logo-slot">
-          <div className="relative h-12 w-12 flex items-center justify-center">
-            <AnimatePresence>
-              {showLogo && (
-                <motion.img 
-                  src={logoImg} 
-                  alt="Logo" 
-                  className="absolute inset-0 h-12 w-12 rounded-full border-2 border-accent object-cover shadow-md"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ 
-                    opacity: 1, 
-                    scale: 1,
-                    rotate: spin ? 360 : 0 
-                  }}
-                  transition={spin ? { duration: 1, ease: "easeInOut" } : { duration: 0.5 }}
-                />
-              )}
-            </AnimatePresence>
-          </div>
-          <span className="text-xl font-bold tracking-tight hidden sm:block">Alyan Shahid</span>
+    <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-bg/85 backdrop-blur-md border-b border-border' : 'bg-transparent'}`}>
+      <div className="container-x flex items-center justify-between h-16 md:h-20">
+        <a href="#home" className="flex items-center gap-3">
+          {showLogo && <img src={logoImg} alt="Logo" className="h-9 w-9 rounded-full object-cover ring-2 ring-accent" />}
+          <span className="font-display font-semibold text-lg">alyan<span className="text-accent">.</span></span>
         </a>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map(link => (
-            <a key={link.name} href={link.href} className="text-sm font-semibold text-text-secondary hover:text-accent transition-colors">
-              {link.name}
+        <nav className="hidden lg:flex items-center gap-7">
+          {links.map(l => (
+            <a key={l.name} href={l.href} className={`relative mono text-xs uppercase tracking-wider py-1 transition-colors ${active === l.href ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'}`}>
+              {l.name}
+              {active === l.href && (
+                <motion.span layoutId="nav-underline" className="absolute -bottom-0.5 left-0 right-0 h-[3px] bg-accent" />
+              )}
             </a>
           ))}
-          <div className="flex items-center gap-4 border-l border-border pl-6">
-            <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-surface-2 text-text-secondary hover:text-accent transition-colors" aria-label="Toggle Theme">
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-            <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-surface-2 text-text-primary border border-border rounded-full text-sm font-medium hover:bg-border transition-all shadow-sm">
-              Preview <Eye size={16} />
-            </a>
-            <a href="/Alyan_Shahid_Resume.pdf" download="Alyan_Shahid_Resume.pdf" className="flex items-center gap-2 px-5 py-2.5 bg-accent text-white rounded-full text-sm font-medium hover:bg-opacity-90 transition-all shadow-md shadow-accent/20">
-              Download <Download size={16} />
-            </a>
-          </div>
         </nav>
 
-        {/* Mobile Toggle */}
-        <button className="md:hidden p-2 text-text-primary" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        <div className="flex items-center gap-3">
+          <button onClick={toggleTheme} aria-label="Toggle Theme" className="h-10 w-10 grid place-items-center border border-border hover:border-border-strong transition-colors">
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-1.5 h-10 px-4 bg-accent text-accent-ink text-sm font-semibold">
+            Resume <ArrowUpRight size={16} />
+          </a>
+          <button className="lg:hidden h-10 w-10 grid place-items-center" onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-surface border-b border-border overflow-hidden absolute top-full left-0 right-0 shadow-xl"
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="lg:hidden bg-bg border-b border-border-strong"
           >
-            <div className="px-6 py-6 flex flex-col gap-5">
-              {links.map(link => (
-                <a key={link.name} href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-xl font-medium text-text-secondary hover:text-accent transition-colors">
-                  {link.name}
+            <div className="container-x py-6 flex flex-col">
+              {links.map((l, i) => (
+                <a key={l.name} href={l.href} onClick={() => setOpen(false)} className="flex items-baseline gap-4 py-3 border-b border-border font-display text-3xl font-semibold">
+                  <span className="mono text-xs text-accent">0{i + 1}</span>{l.name}
                 </a>
               ))}
-              <div className="flex items-center justify-between pt-6 border-t border-border mt-2">
-                <button onClick={toggleTheme} className="flex items-center gap-3 p-3 rounded-xl bg-surface-2 text-text-primary transition-colors w-full">
-                  {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
-                  <span className="font-medium">Toggle Theme</span>
-                </button>
-              </div>
-              <div className="flex flex-col gap-3">
-                <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 bg-surface-2 text-text-primary border border-border rounded-xl text-lg font-medium shadow-sm">
-                  Preview Resume <Eye size={20} />
-                </a>
-                <a href="/Alyan_Shahid_Resume.pdf" download="Alyan_Shahid_Resume.pdf" className="flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white rounded-xl text-lg font-medium shadow-md shadow-accent/20">
-                  Download Resume <Download size={20} />
-                </a>
+              <div className="flex gap-3 mt-6">
+                <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="btn-ghost flex-1 justify-center">Preview</a>
+                <a href="/Alyan_Shahid_Resume.pdf" download="Alyan_Shahid_Resume.pdf" className="btn-accent flex-1 justify-center">Download CV</a>
               </div>
             </div>
           </motion.div>

@@ -95,15 +95,15 @@ export const projects: Project[] = [
   {
     id: "hrms",
     title: "HRMS (TechScale)",
-    description: "A comprehensive Human Resource Management System. It handles employee onboarding, payroll, and attendance tracking, and features a powerful AI chatbot implementation named 'Scale AI' (read-only model) to assist employees with internal queries securely.",
-    techTags: ["React", "NestJS", "AI Chatbot", "Enterprise Software"],
+    description: "An enterprise-grade Human Resource Management System built end-to-end in TypeScript and used daily by 60+ employees at TechScale. The React + Tailwind CSS frontend delivers a clean, responsive dashboard for attendance tracking, leave requests and approvals, payroll, employee onboarding and records. The backend is powered by NestJS on Node.js, exposing well-documented REST APIs secured with role-based access control for admins, managers and employees. Its standout feature is 'Scale AI' — a custom, read-only AI chatbot integrated directly into the platform that answers employees' internal HR and policy questions instantly and securely, without ever modifying company data. Shipped with automated testing and a GitHub Actions CI/CD pipeline for reliable, hands-free deployments.",
+    techTags: ["TypeScript", "React", "Tailwind CSS", "NestJS", "Node.js", "Scale AI Chatbot", "REST API", "RBAC", "CI/CD"],
     liveLink: "https://hrms.techscale.io/"
   },
   {
     id: "5rhythms",
     title: "5Rhythms – Dance Classes",
-    description: "A specialized platform for dance studios to manage class schedules and events. Users can browse upcoming classes, book spots, and view event details through a highly interactive React interface powered by a secure NestJS and PostgreSQL backend.",
-    techTags: ["React", "NestJS", "PostgreSQL", "Booking System"],
+    description: "A full-stack TypeScript booking platform for dance studios and teachers of the 5Rhythms movement practice. Visitors can explore upcoming classes, workshops and events, filter by teacher, date and location, and reserve their spot in just a few clicks. The interactive React frontend, styled with Tailwind CSS, is fast and fully responsive across devices, while a robust NestJS (Node.js) backend with a PostgreSQL database handles scheduling, capacity limits, bookings and user accounts. Built with a modular, type-safe architecture that keeps the codebase scalable and easy to maintain as the community grows.",
+    techTags: ["TypeScript", "React", "Tailwind CSS", "NestJS", "Node.js", "PostgreSQL", "Booking System"],
     liveLink: "https://5rhythms.example.com/"
   }
 ];
@@ -155,14 +155,14 @@ export const certifications: Certification[] = [
     id: "fcc-responsive",
     name: "Responsive Web Design",
     issuer: "freeCodeCamp",
-    link: "/assets/freecodecampcertificate.pdf",
+    link: "src/assets/freecodecampcertificate.pdf",
     isLocal: true
   },
   {
     id: "ms-csharp",
     name: "C# Programming",
     issuer: "Microsoft",
-    link: "/assets/c# certification.pdf",
+    link: "src/assets/c.pdf",
     isLocal: true
   }
 ];

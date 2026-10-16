@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 import { useTheme } from './hooks/useTheme';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
+import Cursor from './components/Cursor';
 import Hero from './sections/Hero';
 import About from './sections/About';
 import WhyMe from './sections/WhyMe';
@@ -15,7 +17,13 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 
 import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
-import logoImg from './assets/logo.jpeg';
+
+const socials = [
+  { label: 'GitHub', url: 'https://github.com/codezworl', icon: <FaGithub size={18} /> },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/alyan-shahid-a1a81a262', icon: <FaLinkedin size={18} /> },
+  { label: 'Instagram', url: 'https://www.instagram.com/hafizalyan66/', icon: <FaInstagram size={18} /> },
+  { label: 'Facebook', url: 'https://www.facebook.com/alyan.alyan.98096721', icon: <FaFacebook size={18} /> },
+];
 
 function App() {
   const { theme, toggleTheme } = useTheme();
@@ -27,48 +35,50 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
-      <div 
-        className="fixed inset-0 z-[-1] opacity-[0.02] pointer-events-none" 
-        style={{ backgroundImage: `url(${logoImg})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: '50%' }}
-      />
-
+    <div className="min-h-screen relative grain">
+      <Cursor />
       <AnimatePresence>
         {loading && <Loader key="loader" />}
       </AnimatePresence>
 
-      <div style={{ opacity: loading ? 0 : 1, transition: 'opacity 0.5s ease-in-out 0.3s' }}>
-          <Navbar theme={theme} toggleTheme={toggleTheme} showLogo={!loading} />
-          <main>
-            <Hero />
-            <About />
-            <WhyMe />
-            <Skills />
-            <Experience />
-            <Education />
-            <Certifications />
-            <Projects />
-            <Services />
-            <Contact />
-          </main>
-          <footer className="py-12 mt-12 text-center text-text-secondary border-t border-border bg-surface-2/30 flex flex-col items-center justify-center gap-6">
-            <div className="flex gap-6">
-              <a href="https://github.com/codezworl" target="_blank" rel="noreferrer" className="text-text-secondary hover:text-accent hover:-translate-y-1 transition-all duration-300">
-                <FaGithub size={24} />
-              </a>
-              <a href="https://www.linkedin.com/in/alyan-shahid-a1a81a262" target="_blank" rel="noreferrer" className="text-text-secondary hover:text-accent hover:-translate-y-1 transition-all duration-300">
-                <FaLinkedin size={24} />
-              </a>
-              <a href="https://www.instagram.com/hafizalyan66/" target="_blank" rel="noreferrer" className="text-text-secondary hover:text-accent hover:-translate-y-1 transition-all duration-300">
-                <FaInstagram size={24} />
-              </a>
-              <a href="https://www.facebook.com/alyan.alyan.98096721" target="_blank" rel="noreferrer" className="text-text-secondary hover:text-accent hover:-translate-y-1 transition-all duration-300">
-                <FaFacebook size={24} />
-              </a>
+      <Navbar theme={theme} toggleTheme={toggleTheme} showLogo={!loading} />
+      <main>
+        <Hero />
+        <About />
+        <WhyMe />
+        <Skills />
+        <Experience />
+        <Education />
+        <Certifications />
+        <Projects />
+        <Services />
+        <Contact />
+      </main>
+
+      <footer className="border-t border-border-strong pt-16 pb-8 overflow-hidden">
+        <div className="container-x">
+          <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
+            <div className="flex gap-3">
+              {socials.map(s => (
+                <a key={s.label} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label}
+                  className="h-11 w-11 grid place-items-center border border-border hover:bg-accent hover:text-accent-ink hover:border-accent transition-colors">
+                  {s.icon}
+                </a>
+              ))}
             </div>
-            <p className="text-sm font-medium">© {new Date().getFullYear()} Muhammad Alyan Shahid. All rights reserved.</p>
-          </footer>
+            <a href="#home" className="mono text-xs uppercase tracking-widest inline-flex items-center gap-2 hover:text-accent self-start">
+              Back to top <ArrowUp size={14} />
+            </a>
+          </div>
+          <h2 className="font-display font-bold leading-[0.8] text-[17vw] md:text-[15vw] tracking-tighter select-none">
+            ALYAN<span className="text-accent">.</span>
+          </h2>
+          <div className="mt-8 flex flex-col md:flex-row justify-between gap-2 mono text-xs text-text-secondary uppercase tracking-wider">
+            <span>© {new Date().getFullYear()} Muhammad Alyan Shahid</span>
+            <span>Lahore, Pakistan — Built with React</span>
+          </div>
         </div>
+      </footer>
     </div>
   );
 }

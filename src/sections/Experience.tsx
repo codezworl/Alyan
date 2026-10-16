@@ -1,58 +1,61 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus } from 'lucide-react';
 import { experience } from '../data';
-import { Briefcase } from 'lucide-react';
+import SectionLabel from '../components/SectionLabel';
 
 export default function Experience() {
+  const [open, setOpen] = useState(0);
+
   return (
-    <section id="experience" className="py-24 px-4 md:px-8 bg-surface-2/30">
-      <div className="w-full max-w-[95%] 2xl:max-w-[1400px] mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Work Experience</h2>
-          <div className="w-24 h-1.5 bg-accent mx-auto rounded-full"></div>
-          <p className="text-text-secondary mt-4 text-lg max-w-2xl mx-auto">
-            My professional journey and roles
-          </p>
-        </div>
+    <section id="experience" className="py-24 md:py-32 bg-surface-2">
+      <div className="container-x">
+        <SectionLabel index="04" label="Experience" aside="Professional journey" title={<>Where I've <span className="hl">worked.</span></>} />
 
-        <div className="max-w-4xl mx-auto relative border-l-2 border-accent/20 ml-4 md:mx-auto">
-          {experience.map((item, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="relative mb-12 pl-8 md:pl-12 group"
-            >
-              {/* Timeline Dot */}
-              <div className="absolute -left-[17px] top-1 w-8 h-8 rounded-full bg-surface border-4 border-accent/30 flex items-center justify-center group-hover:border-accent transition-colors shadow-sm">
-                <div className="w-2 h-2 rounded-full bg-accent"></div>
-              </div>
-
-              {/* Content Card */}
-              <div className="bg-surface p-6 md:p-8 rounded-2xl border border-border shadow-md group-hover:shadow-lg group-hover:border-accent/50 transition-all">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
-                  <h3 className="text-xl md:text-2xl font-bold text-text-primary flex items-center gap-3">
-                    <Briefcase className="text-accent" size={24} />
-                    {item.title}
-                  </h3>
-                  <span className="inline-block px-4 py-1.5 rounded-full bg-accent/10 text-accent font-semibold text-sm w-fit">
-                    {item.dateRange}
+        <div className="border-t border-border-strong">
+          {experience.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className={`relative border-b border-border-strong transition-colors ${isOpen ? 'bg-bg' : ''}`}>
+                {isOpen && <motion.span layoutId="exp-bar" className="absolute left-0 top-0 bottom-0 w-1.5 bg-accent" />}
+                <button
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  className="w-full grid grid-cols-12 gap-4 items-center text-left py-7 px-4 md:px-8 group"
+                >
+                  <span className="col-span-12 md:col-span-3 mono text-xs uppercase tracking-wider text-text-secondary">{item.dateRange}</span>
+                  <span className="col-span-10 md:col-span-6 font-display font-semibold text-2xl md:text-4xl group-hover:text-accent transition-colors">{item.title}</span>
+                  <span className="hidden md:block md:col-span-2 text-text-secondary">{item.company}</span>
+                  <span className="col-span-2 md:col-span-1 flex justify-end">
+                    <span className={`h-10 w-10 grid place-items-center border border-border-strong transition-all ${isOpen ? 'rotate-45 bg-accent text-accent-ink border-accent' : ''}`}>
+                      <Plus size={18} />
+                    </span>
                   </span>
-                </div>
-                
-                <h4 className="text-lg font-medium text-text-secondary mb-4">
-                  {item.company}
-                </h4>
-                
-                <ul className="list-disc list-inside text-text-secondary leading-relaxed space-y-2">
-                  {item.description.map((descItem, i) => (
-                    <li key={i}>{descItem}</li>
-                  ))}
-                </ul>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid grid-cols-12 gap-4 px-4 md:px-8 pb-8">
+                        <div className="col-span-12 md:col-start-4 md:col-span-8">
+                          <p className="md:hidden mono text-xs text-accent mb-3">@ {item.company}</p>
+                          <ul className="space-y-3">
+                            {item.description.map((d, k) => (
+                              <li key={k} className="flex gap-3 text-text-secondary leading-relaxed">
+                                <span className="text-accent mt-1.5 text-xs">■</span>{d}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

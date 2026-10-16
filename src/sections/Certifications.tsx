@@ -1,43 +1,31 @@
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { certifications } from '../data';
-import { Award, ExternalLink, Download } from 'lucide-react';
+import SectionLabel from '../components/SectionLabel';
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-20 px-6 bg-surface-2/30">
-      <div className="w-full max-w-[95%] 2xl:max-w-[1400px] mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Certifications</h2>
-          <div className="w-20 h-1 bg-accent mx-auto rounded-full"></div>
-        </div>
+    <section id="certifications" className="py-24 md:py-32 bg-surface-2">
+      <div className="container-x">
+        <SectionLabel index="06" label="Certifications" aside={`${certifications.length} verified`} title={<>Credentials & <span className="hl">badges.</span></>} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {certifications.map((cert, idx) => (
-            <motion.div 
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {certifications.map((cert, i) => (
+            <motion.a
               key={cert.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="bg-surface p-6 rounded-2xl border border-border shadow-sm flex flex-col h-full hover:border-accent transition-colors group"
+              href={cert.link} target="_blank" rel="noreferrer"
+              initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}
+              className="group relative p-6 md:p-8 bg-bg border border-border-strong min-h-[180px] flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0_0_var(--accent)]"
             >
-              <div className="mb-4 text-accent group-hover:scale-110 transition-transform"><Award size={32} /></div>
-              <h3 className="text-lg font-bold mb-2 flex-grow">{cert.name}</h3>
-              <p className="text-text-secondary text-sm mb-6">{cert.issuer}</p>
-              
-              <a 
-                href={cert.link} 
-                target="_blank" 
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-2 transition-colors mt-auto"
-              >
-                {cert.isLocal ? (
-                  <>View Certificate <Download size={16} /></>
-                ) : (
-                  <>Verify Certificate <ExternalLink size={16} /></>
-                )}
-              </a>
-            </motion.div>
+              <div className="flex justify-between items-start mb-6">
+                <span className="mono text-[11px] uppercase tracking-widest border border-border-strong px-2 py-1 text-text-secondary">{cert.issuer}</span>
+                <span className="h-9 w-9 grid place-items-center border border-border-strong group-hover:bg-accent group-hover:text-accent-ink group-hover:border-accent transition-colors">
+                  <ArrowUpRight size={18} />
+                </span>
+              </div>
+              <h3 className="font-display font-semibold text-xl md:text-2xl leading-tight mt-auto text-text-primary">{cert.name}</h3>
+              <span className="mono text-[11px] uppercase tracking-wider mt-3 text-text-secondary group-hover:text-accent transition-colors">{cert.isLocal ? 'View certificate →' : 'Verify credential →'}</span>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -1,46 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Light mode */
-    --bg: #ffffff;
-    --surface: #f8fafc;
-    --surface-2: #f1f5f9;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --border: #e2e8f0;
+    /* Light mode — warm white + deep yellow */
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --surface-2: #F2F1EC;
+    --text-primary: #0B0B0B;
+    --text-secondary: #55554F;
+    --border: #0B0B0B1F;
+    --border-strong: #0B0B0B;
 
-    --accent: #2563eb;        /* Royal Blue */
-    --accent-2: #4f46e5;      /* Indigo */
-    --accent-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    --accent: #F5B700;
+    --accent-2: #0B0B0B;
+    --accent-ink: #0B0B0B;
+    --accent-gradient: linear-gradient(0deg, #F5B700, #F5B700);
     --danger: #ef4444;
     --warning: #f59e0b;
   }
 
   [data-theme="dark"] {
-    --bg: #020617;            /* Deep Slate */
-    --surface: #0f172a;
-    --surface-2: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border: #334155;
+    /* Dark mode — near black + electric yellow */
+    --bg: #0B0B0B;
+    --surface: #141414;
+    --surface-2: #1E1E1E;
+    --text-primary: #F5F5F0;
+    --text-secondary: #9A9A93;
+    --border: #F5F5F01F;
+    --border-strong: #F5F5F0;
 
-    --accent: #3b82f6;        /* Vivid Blue */
-    --accent-2: #8b5cf6;      /* Bright Purple */
-    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --accent: #FFD60A;
+    --accent-2: #F5F5F0;
+    --accent-ink: #0B0B0B;
+    --accent-gradient: linear-gradient(0deg, #FFD60A, #FFD60A);
   }
+
+  html { scroll-behavior: smooth; }
 
   body {
     @apply bg-bg text-text-primary antialiased transition-colors duration-300;
     font-family: 'Inter', sans-serif;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Clash Display', sans-serif;
+    font-family: 'Clash Display', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
   }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+}
+
+@layer components {
+  .container-x { @apply w-full max-w-[1320px] mx-auto px-5 md:px-10; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--text-primary);
+  }
+  .btn-accent {
+    @apply inline-flex items-center gap-2 px-6 py-3.5 font-semibold transition-all duration-200;
+    background: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: 4px 4px 0 0 var(--border-strong);
+  }
+  .btn-accent:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 0 var(--border-strong); }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3.5 font-semibold border transition-colors duration-200;
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover { background: var(--text-primary); color: var(--bg); }
+  .hl {
+    background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%);
+  }
+}
+
+/* Grain overlay */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Fix for Chrome autofill background in dark mode */
@@ -50,7 +96,9 @@ input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px var(--surface-2) inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg) inset !important;
   -webkit-text-fill-color: var(--text-primary) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+@media (hover: none) { .cursor-dot { display: none; } }

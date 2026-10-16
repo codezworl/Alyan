@@ -1,67 +1,46 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2, Cpu, Shield, Clock } from 'lucide-react';
 import videoFile from '../assets/video.mp4';
+import SectionLabel from '../components/SectionLabel';
+
+const features = [
+  { title: 'Performance Optimized', desc: 'Built for efficiency and a smooth user experience on every device.' },
+  { title: 'Secure & Scalable', desc: 'Role-based access, clean APIs, and architecture that grows with you.' },
+  { title: 'On-Time Delivery', desc: 'Realistic deadlines, clear communication, no surprises.' },
+  { title: 'Quality Code', desc: 'Clean, maintainable, tested and well-documented.' },
+];
 
 export default function WhyMe() {
-  const features = [
-    { icon: <Cpu size={24} />, title: "Performance Optimized", desc: "Built for efficiency and smooth user experience." },
-    { icon: <Shield size={24} />, title: "Secure & Scalable", desc: "Built with best security practices." },
-    { icon: <Clock size={24} />, title: "On-Time Delivery", desc: "Strict adherence to project deadlines." },
-    { icon: <CheckCircle2 size={24} />, title: "Quality Code", desc: "Clean, maintainable, and well-documented." }
-  ];
-
   return (
-    <section id="why-me" className="py-24 px-4 md:px-8">
-      <div className="w-full max-w-[95%] 2xl:max-w-[1400px] mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Why Choose Me?</h2>
-          <div className="w-24 h-1.5 bg-accent mx-auto rounded-full"></div>
-        </div>
+    <section id="why-me" className="py-24 md:py-32 bg-surface-2">
+      <div className="container-x">
+        <SectionLabel index="02" label="Why Me" aside="What sets my work apart" title={<>Reliable products,<br />not just <span className="text-outline">checklists.</span></>} />
 
-        <div className="flex flex-col lg:flex-row gap-12 items-center bg-surface p-6 md:p-10 rounded-3xl border border-border shadow-lg">
-          <div className="w-full lg:w-1/2 relative group">
-            <div className="absolute -inset-4 bg-accent-gradient opacity-20 blur-xl rounded-3xl group-hover:opacity-40 transition-opacity duration-500"></div>
-            <video 
-              src={videoFile}
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="relative z-10 w-full rounded-2xl shadow-2xl border-4 border-surface object-cover aspect-video"
-            />
-          </div>
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            className="relative lg:sticky lg:top-28"
+          >
+            <div className="absolute -top-3 -left-3 w-full h-full border border-accent" />
+            <video src={videoFile} autoPlay loop muted playsInline className="relative w-full aspect-video object-cover border border-border-strong" />
+            <p className="mt-6 text-text-secondary text-lg leading-relaxed">
+              I focus on understanding the core requirements first and make sure the architecture makes sense before writing any code. Practical mindset plus modern frameworks equals solutions that are easy to use and easy to maintain.
+            </p>
+          </motion.div>
 
-          <div className="w-full lg:w-1/2">
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-text-primary">What Sets My Work Apart</h3>
-            <div className="text-text-secondary mb-8 text-lg space-y-4">
-              <p>
-                When taking on a project, my priority is to deliver a reliable product rather than just completing a checklist of features. I focus on understanding the core requirements first, ensuring that the architecture makes sense before writing any code.
-              </p>
-              <p>
-                Throughout the development cycle, I prioritize clear communication and stick to realistic deadlines. By combining a practical mindset with modern frameworks, I build solutions that are straightforward to use and easy to maintain in the long run.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {features.map((feat, idx) => (
-                <motion.div 
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="p-5 bg-surface-2 rounded-xl border border-border flex flex-col gap-3 hover:border-accent hover:shadow-md transition-all group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-surface flex items-center justify-center text-accent shadow-sm border border-border group-hover:scale-110 transition-transform">
-                    {feat.icon}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-text-primary">{feat.title}</h4>
-                    <p className="text-sm text-text-secondary mt-1">{feat.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          <div className="border-t border-border-strong">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="group flex gap-6 md:gap-10 py-8 border-b border-border-strong"
+              >
+                <span className="font-display font-semibold text-5xl md:text-6xl text-accent leading-none w-16 shrink-0">0{i + 1}</span>
+                <div>
+                  <h3 className="font-display font-semibold text-2xl md:text-3xl mb-2 group-hover:translate-x-2 transition-transform">{f.title}</h3>
+                  <p className="text-text-secondary">{f.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 import logoImg from '../assets/logo.jpeg';
+import resumePdf from '../../Alyanshahid.pdf';
 
 const links = [
   { name: 'About', href: '#about' },
@@ -57,7 +58,7 @@ export default function Navbar({ theme, toggleTheme, showLogo }: { theme: string
           <button onClick={toggleTheme} aria-label="Toggle Theme" className="h-10 w-10 grid place-items-center border border-border hover:border-border-strong transition-colors">
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-          <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-1.5 h-10 px-4 bg-accent text-accent-ink text-sm font-semibold">
+          <a href={resumePdf} target="_blank" rel="noreferrer" className="hidden sm:inline-flex items-center gap-1.5 h-10 px-4 bg-accent text-accent-ink text-sm font-semibold">
             Resume <ArrowUpRight size={16} />
           </a>
           <button className="lg:hidden h-10 w-10 grid place-items-center" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -81,8 +82,8 @@ export default function Navbar({ theme, toggleTheme, showLogo }: { theme: string
                 </a>
               ))}
               <div className="flex gap-3 mt-6">
-                <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noreferrer" className="btn-ghost flex-1 justify-center">Preview</a>
-                <a href="/Alyan_Shahid_Resume.pdf" download="Alyan_Shahid_Resume.pdf" className="btn-accent flex-1 justify-center">Download CV</a>
+                <a href={resumePdf} target="_blank" rel="noreferrer" className="btn-ghost flex-1 justify-center">Preview</a>
+                <a href={resumePdf} download="Alyanshahid.pdf" className="btn-accent flex-1 justify-center">Download CV</a>
               </div>
             </div>
           </motion.div>

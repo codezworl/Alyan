@@ -5,6 +5,7 @@ import { ArrowUpRight, X, Eye, Download, LayoutGrid, List, ExternalLink } from '
 import { FaGithub } from 'react-icons/fa';
 import * as Dialog from '@radix-ui/react-dialog';
 import SectionLabel from '../components/SectionLabel';
+import resumePdf from '../../Alyanshahid.pdf';
 
 type Project = typeof projects[0];
 
@@ -100,8 +101,8 @@ export default function Projects() {
         </AnimatePresence>
 
         <div className="mt-16 flex flex-wrap gap-4">
-          <a href="/Alyan_Shahid_Resume.pdf" target="_blank" rel="noopener noreferrer" className="btn-ghost">Preview Resume <Eye size={18} /></a>
-          <a href="/Alyan_Shahid_Resume.pdf" download="Alyan_Shahid_Resume.pdf" className="btn-accent">Download Resume <Download size={18} /></a>
+          <a href={resumePdf} target="_blank" rel="noopener noreferrer" className="btn-ghost">Preview Resume <Eye size={18} /></a>
+          <a href={resumePdf} download="Alyanshahid.pdf" className="btn-accent">Download Resume <Download size={18} /></a>
         </div>
 
         <Dialog.Root open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>

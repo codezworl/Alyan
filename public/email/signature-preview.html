@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Alyan Shahid — Email Signature Preview</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #121212;
+      color: #E0E0E0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .header-bar {
+      border-bottom: 2px solid #FFD60A;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      color: #F5F5F0;
+      letter-spacing: 0.5px;
+    }
+    .instruction {
+      font-size: 13px;
+      color: #9A9A93;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .copy-btn {
+      background-color: #FFD60A;
+      color: #0B0B0B;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 18px;
+      border: 1px solid #FFD60A;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 0 #000;
+    }
+    .copy-btn:hover {
+      background-color: #FFE033;
+    }
+    .toast {
+      display: inline-block;
+      margin-left: 12px;
+      color: #4ADE80;
+      font-size: 13px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .card-label {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      font-weight: bold;
+      color: #FFD60A;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .canvas {
+      padding: 30px;
+      border-radius: 6px;
+      overflow-x: auto;
+      border: 1px solid #333333;
+    }
+    .canvas-light {
+      background-color: #FFFFFF;
+    }
+    .canvas-dark {
+      background-color: #202124;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header-bar">
+      <h1>Email Signature Preview</h1>
+      <div>
+        <button class="copy-btn" onclick="copySignature()">Copy Signature</button>
+        <span id="toast" class="toast">✓ Copied to clipboard!</span>
+      </div>
+    </div>
+    
+    <div class="instruction">
+      Click <strong>"Copy Signature"</strong> above (or select the signature and press Ctrl+C / Cmd+C). Then open <strong>Gmail &rarr; Settings &rarr; General &rarr; Signature</strong>, create or select your signature, and press <strong>Ctrl+V / Cmd+V</strong>.
+    </div>
+
+    <div class="preview-grid">
+      <!-- Light Email Client Background -->
+      <div>
+        <div class="card-label">Light Background (#FFFFFF)</div>
+        <div class="canvas canvas-light">
+          <div id="signature-target">
+            <!-- START SIGNATURE -->
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" role="presentation" bgcolor="#0B0B0B" style="max-width:560px;width:100%;background-color:#0B0B0B;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+              <tr>
+                <td valign="middle" width="96" bgcolor="#0B0B0B" style="width:96px;padding:16px 14px 16px 16px;background-color:#0B0B0B;">
+                  <a href="https://alyan-mu.vercel.app/" target="_blank" style="text-decoration:none;display:block;">
+                    <img src="https://alyan-mu.vercel.app/email/logo-as-240.png" alt="Alyan Shahid" width="96" height="96" border="0" style="display:block;width:96px;height:96px;border:0;" />
+                  </a>
+                </td>
+                <td width="4" bgcolor="#FFD60A" style="width:4px;background-color:#FFD60A;font-size:0;line-height:0;">&nbsp;</td>
+                <td valign="middle" bgcolor="#0B0B0B" style="padding:16px 16px 16px 18px;background-color:#0B0B0B;">
+                  <div style="font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:22px;font-weight:bold;color:#F5F5F0;letter-spacing:0.5px;">MUHAMMAD ALYAN SHAHID</div>
+                  <div style="font-family:'Courier New',Courier,monospace;font-size:11px;line-height:16px;font-weight:bold;color:#FFD60A;text-transform:uppercase;letter-spacing:1px;padding-top:3px;">FULL STACK DEVELOPER</div>
+                  <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:16px;color:#9A9A93;padding-top:3px;">React.js &bull; TypeScript &bull; Node.js &bull; NestJS &bull; AI Integration</div>
+                  <div style="height:1px;background-color:#2A2A2A;line-height:1px;font-size:0;margin:10px 0;">&nbsp;</div>
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%" role="presentation" style="border-collapse:collapse;">
+                    <tr>
+                      <td valign="top" style="padding:0 8px 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                        <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">E:</span>
+                        <a href="mailto:hafizalyan66@gmail.com" style="color:#F5F5F0;text-decoration:none;">hafizalyan66@gmail.com</a>
+                      </td>
+                      <td valign="top" style="padding:0 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                        <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">P:</span>
+                        <a href="tel:+923215953600" style="color:#F5F5F0;text-decoration:none;">+92 321 5953600</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td valign="top" style="padding:0 8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                        <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">W:</span>
+                        <a href="https://alyan-mu.vercel.app" target="_blank" style="color:#F5F5F0;text-decoration:none;">alyan-mu.vercel.app</a>
+                      </td>
+                      <td valign="top" style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#9A9A93;">
+                        <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">L:</span>
+                        <span style="color:#F5F5F0;">Lahore, Pakistan</span>
+                      </td>
+                    </tr>
+                  </table>
+                  <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;margin-top:12px;">
+                    <tr>
+                      <td valign="middle" style="padding-right:8px;">
+                        <a href="https://alyan-mu.vercel.app" target="_blank" style="display:inline-block;background-color:#FFD60A;color:#0B0B0B;font-family:'Courier New',Courier,monospace;font-size:11px;line-height:14px;font-weight:bold;text-transform:uppercase;text-decoration:none;padding:8px 12px;border:1px solid #FFD60A;letter-spacing:0.5px;">PORTFOLIO</a>
+                      </td>
+                      <td valign="middle" style="padding-right:6px;">
+                        <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
+                          <tr>
+                            <td width="32" height="32" align="center" valign="middle" bgcolor="#141414" style="width:32px;height:32px;background-color:#141414;border:1px solid #2A2A2A;border-radius:4px;padding:0;">
+                              <a href="https://www.linkedin.com/in/alyan-shahid-a1a81a262" target="_blank" title="LinkedIn" style="text-decoration:none;display:block;width:32px;height:32px;line-height:32px;">
+                                <img src="https://alyan-mu.vercel.app/email/icon-linkedin-64.png" alt="LinkedIn" width="20" height="20" border="0" style="display:block;margin:6px auto;width:20px;height:20px;border:0;" />
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td valign="middle">
+                        <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
+                          <tr>
+                            <td width="32" height="32" align="center" valign="middle" bgcolor="#141414" style="width:32px;height:32px;background-color:#141414;border:1px solid #2A2A2A;border-radius:4px;padding:0;">
+                              <a href="https://github.com/codezworl" target="_blank" title="GitHub" style="text-decoration:none;display:block;width:32px;height:32px;line-height:32px;">
+                                <img src="https://alyan-mu.vercel.app/email/icon-github-64.png" alt="GitHub" width="20" height="20" border="0" style="display:block;margin:6px auto;width:20px;height:20px;border:0;" />
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- END SIGNATURE -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Email Client Background (#202124) -->
+      <div>
+        <div class="card-label">Dark Background (#202124)</div>
+        <div class="canvas canvas-dark">
+          <table cellpadding="0" cellspacing="0" border="0" width="100%" role="presentation" bgcolor="#0B0B0B" style="max-width:560px;width:100%;background-color:#0B0B0B;border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+            <tr>
+              <td valign="middle" width="96" bgcolor="#0B0B0B" style="width:96px;padding:16px 14px 16px 16px;background-color:#0B0B0B;">
+                <a href="https://alyan-mu.vercel.app/" target="_blank" style="text-decoration:none;display:block;">
+                  <img src="https://alyan-mu.vercel.app/email/logo-as-240.png" alt="Alyan Shahid" width="96" height="96" border="0" style="display:block;width:96px;height:96px;border:0;" />
+                </a>
+              </td>
+              <td width="4" bgcolor="#FFD60A" style="width:4px;background-color:#FFD60A;font-size:0;line-height:0;">&nbsp;</td>
+              <td valign="middle" bgcolor="#0B0B0B" style="padding:16px 16px 16px 18px;background-color:#0B0B0B;">
+                <div style="font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:22px;font-weight:bold;color:#F5F5F0;letter-spacing:0.5px;">MUHAMMAD ALYAN SHAHID</div>
+                <div style="font-family:'Courier New',Courier,monospace;font-size:11px;line-height:16px;font-weight:bold;color:#FFD60A;text-transform:uppercase;letter-spacing:1px;padding-top:3px;">FULL STACK DEVELOPER</div>
+                <div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:16px;color:#9A9A93;padding-top:3px;">React.js &bull; TypeScript &bull; Node.js &bull; NestJS &bull; AI Integration</div>
+                <div style="height:1px;background-color:#2A2A2A;line-height:1px;font-size:0;margin:10px 0;">&nbsp;</div>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" role="presentation" style="border-collapse:collapse;">
+                  <tr>
+                    <td valign="top" style="padding:0 8px 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                      <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">E:</span>
+                      <a href="mailto:hafizalyan66@gmail.com" style="color:#F5F5F0;text-decoration:none;">hafizalyan66@gmail.com</a>
+                    </td>
+                    <td valign="top" style="padding:0 0 4px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                      <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">P:</span>
+                      <a href="tel:+923215953600" style="color:#F5F5F0;text-decoration:none;">+92 321 5953600</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td valign="top" style="padding:0 8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;">
+                      <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">W:</span>
+                      <a href="https://alyan-mu.vercel.app" target="_blank" style="color:#F5F5F0;text-decoration:none;">alyan-mu.vercel.app</a>
+                    </td>
+                    <td valign="top" style="padding:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#9A9A93;">
+                      <span style="color:#FFD60A;font-family:'Courier New',Courier,monospace;font-weight:bold;">L:</span>
+                      <span style="color:#F5F5F0;">Lahore, Pakistan</span>
+                    </td>
+                  </tr>
+                </table>
+                <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;margin-top:12px;">
+                  <tr>
+                    <td valign="middle" style="padding-right:8px;">
+                      <a href="https://alyan-mu.vercel.app" target="_blank" style="display:inline-block;background-color:#FFD60A;color:#0B0B0B;font-family:'Courier New',Courier,monospace;font-size:11px;line-height:14px;font-weight:bold;text-transform:uppercase;text-decoration:none;padding:8px 12px;border:1px solid #FFD60A;letter-spacing:0.5px;">PORTFOLIO</a>
+                    </td>
+                    <td valign="middle" style="padding-right:6px;">
+                      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="32" height="32" align="center" valign="middle" bgcolor="#141414" style="width:32px;height:32px;background-color:#141414;border:1px solid #2A2A2A;border-radius:4px;padding:0;">
+                            <a href="https://www.linkedin.com/in/alyan-shahid-a1a81a262" target="_blank" title="LinkedIn" style="text-decoration:none;display:block;width:32px;height:32px;line-height:32px;">
+                              <img src="https://alyan-mu.vercel.app/email/icon-linkedin-64.png" alt="LinkedIn" width="20" height="20" border="0" style="display:block;margin:6px auto;width:20px;height:20px;border:0;" />
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td valign="middle">
+                      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
+                        <tr>
+                          <td width="32" height="32" align="center" valign="middle" bgcolor="#141414" style="width:32px;height:32px;background-color:#141414;border:1px solid #2A2A2A;border-radius:4px;padding:0;">
+                            <a href="https://github.com/codezworl" target="_blank" title="GitHub" style="text-decoration:none;display:block;width:32px;height:32px;line-height:32px;">
+                              <img src="https://alyan-mu.vercel.app/email/icon-github-64.png" alt="GitHub" width="20" height="20" border="0" style="display:block;margin:6px auto;width:20px;height:20px;border:0;" />
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function copySignature() {
+      const el = document.getElementById('signature-target');
+      const html = el.innerHTML.trim();
+      const text = el.innerText.trim();
+
+      try {
+        if (window.ClipboardItem) {
+          const item = new ClipboardItem({
+            'text/html': new Blob([html], { type: 'text/html' }),
+            'text/plain': new Blob([text], { type: 'text/plain' })
+          });
+          await navigator.clipboard.write([item]);
+          showToast();
+          return;
+        }
+      } catch (err) {
+        // Fallback to execCommand
+      }
+
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      document.execCommand('copy');
+      sel.removeAllRanges();
+      showToast();
+    }
+
+    function showToast() {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+  </script>
+</body>
+</html>

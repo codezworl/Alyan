@@ -4,7 +4,8 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import SectionLabel from '../components/SectionLabel';
 
-const EMAIL = 'hafizalyan66@gmail.com';
+const DISPLAY_EMAIL = 'contact.alyandev@gmail.com';
+const EMAILJS_TO_EMAIL = 'hafizalyan66@gmail.com';
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -26,7 +27,7 @@ export default function Contact() {
   const isEmailValid = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const copyEmail = () => {
-    navigator.clipboard.writeText(EMAIL);
+    navigator.clipboard.writeText(DISPLAY_EMAIL);
     setCopied(true);
     setTimeout(() => setCopied(false), 1800);
   };
@@ -49,7 +50,7 @@ export default function Contact() {
       subject: formData.subject,
       message: formData.message,
       to_name: "Alyan Shahid",
-      to_email: EMAIL
+      to_email: EMAILJS_TO_EMAIL
     };
 
     // Sending email using the provided EmailJS configuration
@@ -94,7 +95,7 @@ export default function Contact() {
             <div>
               <div className="mono text-[11px] uppercase tracking-widest text-text-secondary mb-2">Email</div>
               <div className="flex items-center gap-3 flex-wrap">
-                <a href={`mailto:${EMAIL}`} className="font-display font-semibold text-2xl md:text-3xl hover:text-accent transition-colors break-all">{EMAIL}</a>
+                <a href={`mailto:${DISPLAY_EMAIL}`} className="font-display font-semibold text-2xl md:text-3xl hover:text-accent transition-colors break-all">{DISPLAY_EMAIL}</a>
                 <button onClick={copyEmail} aria-label="Copy email" className="h-9 w-9 grid place-items-center border border-border-strong hover:bg-accent hover:text-accent-ink hover:border-accent transition-colors">
                   {copied ? <Check size={16} /> : <Copy size={16} />}
                 </button>

@@ -1,7 +1,7 @@
-MUHAMMAD ALYAN SHAHID
-FULL STACK DEVELOPER
-React.js • TypeScript • Node.js • NestJS • AI Integration
-hafizalyan66@gmail.com
+Muhammad Alyan Shahid
+Full Stack Developer
+React.js, TypeScript, Node.js, NestJS, AI Integration
+contact.alyandev@gmail.com
 +92 321 5953600
 Lahore, Pakistan
 https://alyan-mu.vercel.app
